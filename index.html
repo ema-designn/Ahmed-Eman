@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أحمد & إيمان | AHMED & EMAN   </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Great+Vibes&family=Markazi+Text:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #FAF8F3;
+    --cream-2: #F1EEE4;
+    --gold: #6E8259;
+    --gold-deep: #445936;
+    --brown-ink: #333B2C;
+    --brown-soft: #71795F;
+    --line: #D9E0CB;
+    --hero-dark: #1C2418;
+    --light-green: #8AAF74;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--cream);
+    color: var(--brown-ink);
+    font-family: 'Markazi Text', serif;
+    font-size: 20px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body.lang-en{ direction: ltr; }
+  body.lang-en{ font-family: 'Cormorant Garamond', serif; }
+
+  /* language visibility */
+  body.lang-ar .en{ display: none !important; }
+  body.lang-en .ar{ display: none !important; }
+
+  .ar{ font-family: 'Markazi Text', serif; }
+  body.lang-ar .display-ar{ font-family: 'Aref Ruqaa', serif; }
+  .en{ font-family: 'Cormorant Garamond', serif; }
+
+  section{
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 70px 28px;
+    position: relative;
+  }
+
+  /* ---------- INTRO VIDEO ---------- */
+  body.intro-active { overflow: hidden; }
+  
+  #intro-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #111 url('pho.jpg') center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  
+  #intro-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    opacity: 0;            /* hidden until the first real frame is ready (no black flash) */
+  }
+  #intro-video.ready { opacity: 1; }
+
+  /* ---------- language toggle ---------- */
+  .lang-toggle{
+    position: fixed;
+    top: 18px;
+    inset-inline-end: 18px;
+    z-index: 999;
+    display: flex;
+    gap: 8px;
+    background: rgba(251,247,240,0.85);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px;
+    box-shadow: 0 4px 14px rgba(74,58,42,0.12);
+  }
+  .lang-btn{
+    border: none;
+    background: transparent;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    color: var(--brown-soft);
+    transition: all .25s ease;
+  }
+  .lang-btn.active{
+    background: var(--gold);
+    color: var(--cream);
+  }
+
+  /* ---------- music toggle ---------- */
+  .music-toggle{
+    position: fixed;
+    top: 18px;
+    inset-inline-start: 18px;
+    z-index: 999;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: rgba(251,247,240,0.85);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 14px rgba(74,58,42,0.12);
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  /* ---------- MAIN IMAGE ---------- */
+  .main-image-section {
+    padding: 0 !important;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 480px;
+  }
+  .main-image-section img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  /* ---------- COUNTDOWN ---------- */
+  .countdown-section{
+    background: var(--gold);
+    color: var(--cream);
+    text-align: center;
+    max-width: 100%;
+    padding: 80px 28px;
+  }
+  .countdown-title{
+    font-size: 40px;
+    letter-spacing: 3px;
+    color: #FAF8F3;
+  }
+  body.lang-ar .countdown-title{ font-family: 'Aref Ruqaa', serif; }
+  .countdown-sub{
+    margin-top: 10px;
+    font-style: italic;
+    color: #EDF1E4;
+    font-size: 18px;
+  }
+  .countdown-grid{
+    display:flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 44px;
+    flex-wrap: nowrap;
+  }
+  .countdown-box{
+    background: var(--gold-deep);
+    border: 1px solid #33422A;
+    border-radius: 10px;
+    padding: 22px 16px;
+    min-width: 74px;
+    flex: 1; 
+  }
+  .countdown-num{
+    font-size: 34px;
+    color: #F3EFDD;
+  }
+  .countdown-label{
+    margin-top: 6px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--line);
+  }
+  .countdown-dots{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    margin-top: 40px;
+  }
+  .countdown-dots span{ width: 40px; height:1px; background: var(--gold-deep); }
+  .countdown-dots i{ width:6px; height:6px; border-radius:50%; background:#F3EFDD; display:inline-block; }
+
+  /* ---------- LOCATION ---------- */
+  .location-card{
+    text-align:center;
+  }
+  .heart-badge{
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    margin: 0 auto 22px;
+    color: var(--gold);
+  }
+  .location-title{
+    font-size: 34px;
+    color: var(--brown-ink);
+  }
+  body.lang-ar .location-title{ font-family: 'Aref Ruqaa', serif; }
+  .location-times{
+    margin-top: 22px;
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--brown-soft);
+    font-size: 18px;
+  }
+  .location-times .row{ display:flex; align-items:center; justify-content:center; gap:8px; }
+  .location-address{
+    margin-top: 18px;
+    color: var(--brown-soft);
+    font-size: 16px;
+    padding: 0 10px;
+  }
+  .map-embed{
+    margin-top: 22px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    height: 220px;
+  }
+  .map-embed iframe{ width:100%; height:100%; border:0; filter: sepia(12%) saturate(85%); }
+  .maps-btn{
+    margin-top: 20px;
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    border: 1px solid var(--gold);
+    color: var(--gold-deep);
+    background: transparent;
+    padding: 12px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 16px;
+    letter-spacing: 1px;
+    transition: all .25s ease;
+  }
+  .maps-btn:hover{ background: var(--gold); color: var(--cream); }
+
+  /* ---------- RSVP ---------- */
+  .venue-note{
+    display:block;
+    margin-top: 12px;
+    font-size: 15px;
+    color: var(--gold-deep);
+    font-style: italic;
+  }
+  .rsvp-section{
+    /* ⬇⬇⬇ حطي لينك الصورة هنا بدل الكلمات اللي جوه القوسين ⬇⬇⬇ */
+    --rsvp-photo: url('https://i.pinimg.com/736x/e7/89/bc/e789bc1f7220a5f257842905cad0b597.jpg');
+    /* ⬆⬆⬆ مثال: url('https://i.pinimg.com/originals/xx/xx/xx.jpg') ⬆⬆⬆ */
+    max-width: 100%;
+    padding: 80px 22px 90px;
+    overflow: hidden;
+    color: var(--cream);
+    background:
+      linear-gradient(rgba(16,22,13,.55), rgba(16,22,13,.80)),
+      var(--rsvp-photo),
+      var(--hero-dark);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .rsvp-inner{ position:relative; max-width: 440px; margin: 0 auto; text-align:center; }
+  .rsvp-title{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: .5px;
+    color: #FAF8F3;
+    text-shadow: 0 2px 14px rgba(0,0,0,.45);
+  }
+  body.lang-ar .rsvp-title{ font-family: 'Aref Ruqaa', serif; font-weight:700; font-size: 38px; }
+  .rsvp-sub{
+    margin-top: 14px;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 18px;
+    color: #E6ECD8;
+  }
+  body.lang-ar .rsvp-sub{ font-family: 'Markazi Text', serif; font-size: 22px; }
+
+  .rsvp-card{
+    margin-top: 40px;
+    text-align: start;
+    border: 1px solid #A9C28F;
+    border-radius: 26px;
+    padding: 36px 26px 32px;
+    background: rgba(20,28,16,.52);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    font-family: 'Titillium Web', sans-serif;
+  }
+  body.lang-ar .rsvp-card{ font-family: 'Markazi Text', serif; }
+  .rsvp-field{ margin-bottom: 30px; }
+  .rsvp-field label, .rsvp-label{
+    display:block;
+    font-size: 17px;
+    letter-spacing: .6px;
+    color: #E6ECD8;
+    margin-bottom: 10px;
+  }
+  body.lang-ar .rsvp-field label, body.lang-ar .rsvp-label{ font-size: 21px; letter-spacing:0; }
+  .rsvp-field input, .rsvp-field textarea{
+    width:100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #A9C28F;
+    border-radius: 0 0 10px 10px;
+    color: #FAF8F3;
+    font: inherit;
+    font-size: 18px;
+    padding: 14px 4px;
+    outline: none;
+    transition: border-color .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-field textarea{
+    border: 1px solid #A9C28F;
+    border-radius: 14px;
+    padding: 14px;
+    resize: vertical;
+    min-height: 110px;
+  }
+  .rsvp-field input:focus, .rsvp-field textarea:focus{
+    border-color: #DDE8CB;
+    box-shadow: 0 0 0 3px rgba(169,194,143,.18);
+  }
+  .rsvp-field.invalid input{ border-color: #E9A99B; }
+  .rsvp-error{ display:none; margin-top:8px; font-size:14px; color:#F0B8AB; }
+  .rsvp-field.invalid .rsvp-error{ display:block; }
+
+  .rsvp-choices{ display:flex; gap: 14px; }
+  .rsvp-choice{
+    flex:1;
+    font: inherit;
+    font-size: 16px;
+    color: #FAF8F3;
+    background: transparent;
+    border: 1px solid #A9C28F;
+    border-radius: 14px;
+    padding: 18px 8px;
+    cursor: pointer;
+    transition: all .25s ease;
+  }
+  body.lang-ar .rsvp-choice{ font-size: 20px; }
+  .rsvp-choice.selected{
+    background: linear-gradient(135deg, #8AAF74 0%, #C9DAB0 55%, #A9C28F 100%);
+    border-color: transparent;
+    color: #1C2418;
+    font-weight: 600;
+    box-shadow: 0 8px 22px rgba(138,175,116,.25);
+  }
+
+  .rsvp-submit{
+    width:100%;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    font: inherit;
+    font-size: 21px;
+    font-weight: 700;
+    color: #1C2418;
+    background: linear-gradient(135deg, #8AAF74 0%, #C9DAB0 55%, #A9C28F 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 20px 14px;
+    margin-top: 10px;
+    cursor: pointer;
+    box-shadow: 0 10px 26px rgba(0,0,0,.35);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  body.lang-ar .rsvp-submit{ font-size: 24px; }
+  .rsvp-submit:hover{ transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,0,0,.45); }
+  .rsvp-submit:active{ transform: translateY(0); }
+
+
+  /* ---------- RECIPIENT PICKER (bride / groom) ---------- */
+  .pick-overlay{
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    background: rgba(14,20,11,.62);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    opacity: 0; visibility: hidden;
+    transition: opacity .25s ease, visibility .25s ease;
+  }
+  .pick-overlay.show{ opacity: 1; visibility: visible; }
+  .pick-box{
+    position: relative;
+    width: 100%; max-width: 310px;
+    padding: 26px 18px 20px;
+    text-align: center;
+    background: linear-gradient(160deg, #FAF8F3 0%, #EEF3E4 100%);
+    border: 1px solid #C9DAB0;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.4);
+    transform: translateY(14px) scale(.96);
+    transition: transform .3s cubic-bezier(.2,.9,.3,1.2);
+  }
+  .pick-overlay.show .pick-box{ transform: translateY(0) scale(1); }
+  .pick-close{
+    position: absolute; top: 10px; inset-inline-end: 10px;
+    width: 28px; height: 28px; border-radius: 50%;
+    border: none; background: rgba(110,130,89,.15);
+    color: var(--gold-deep); font-size: 17px; line-height: 1;
+    cursor: pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .pick-heart{ font-size: 20px; color: var(--gold); margin-bottom: 4px; }
+  .pick-title{
+    font-size: 24px; font-weight: 700; color: var(--gold-deep); line-height: 1.3;
+  }
+  body.lang-ar .pick-title{ font-family: 'Aref Ruqaa', serif; font-size: 25px; }
+  .pick-sub{ font-size: 16px; color: var(--brown-soft); margin: 4px 0 18px; }
+  body.lang-ar .pick-sub{ font-size: 19px; }
+  .pick-options{ display: flex; gap: 12px; }
+  .pick-opt{
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 14px 6px 12px;
+    font: inherit; color: var(--brown-ink);
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(68,89,54,.10);
+    transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pick-opt:active{ transform: scale(.96); border-color: var(--light-green); }
+  .pick-opt:hover{ border-color: var(--light-green); box-shadow: 0 8px 18px rgba(138,175,116,.3); }
+  .pick-ico{
+    width: 54px; height: 54px; border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 28px;
+    background: radial-gradient(circle at 30% 25%, #F4F8EC 0%, #D9E7C6 100%);
+    border: 1px solid #C9DAB0;
+  }
+  .pick-name{ font-size: 18px; font-weight: 700; color: var(--gold-deep); }
+  body.lang-ar .pick-name{ font-size: 22px; }
+
+  /* ---------- GOOD TO KNOW (FAQ) ---------- */
+  .faq-section{ text-align: center; }
+  .faq-title{
+    font-size: 34px;
+    color: var(--brown-ink);
+  }
+  body.lang-ar .faq-title{ font-family: 'Aref Ruqaa', serif; }
+  .faq-sub{
+    margin-top: 8px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brown-soft);
+  }
+  .faq-list{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: start;
+  }
+  .faq-item{
+    background: var(--cream-2);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .faq-item summary{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker{ display: none; }
+  .faq-q{
+    font-size: 19px;
+    color: var(--brown-ink);
+    line-height: 1.4;
+  }
+  body.lang-ar .faq-q{ font-family: 'Aref Ruqaa', serif; font-size: 21px; }
+  .faq-arrow{
+    flex-shrink: 0;
+    color: var(--light-green);
+    font-size: 15px;
+    transition: transform .25s ease;
+  }
+  .faq-item[open] .faq-arrow{ transform: rotate(180deg); }
+  .faq-answer{
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--light-green);
+    color: var(--brown-soft);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* ---------- THANK YOU ---------- */
+  .thankyou{
+    text-align: center;
+    padding: 60px 28px 70px;
+  }
+  .ty-divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 12px;
+    color: var(--gold);
+  }
+  .ty-divider span{ width: 36px; height:1px; background: var(--line); }
+  .ty-title{
+    margin-top: 18px;
+    font-size: 34px;
+    color: var(--brown-ink);
+  }
+  body.lang-ar .ty-title{ font-family: 'Aref Ruqaa', serif; }
+  .ty-sub{
+    margin-top: 6px;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--gold-deep);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .ty-body{
+    margin-top: 16px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--brown-soft);
+    text-transform: uppercase;
+  }
+  .ty-sign{
+    margin-top: 24px;
+    font-size: 20px;
+    color: var(--brown-ink);
+  }
+
+  /* ---------- Mobile Adjustments ---------- */
+  @media (max-width: 480px){
+    .countdown-grid {
+      gap: 6px;
+    }
+    .countdown-box{ 
+      min-width: 0; 
+      padding: 16px 4px; 
+    }
+    .countdown-num {
+      font-size: 26px; 
+    }
+    .countdown-label {
+      font-size: 10px;
+    }
+  }
+</style>
+</head>
+<body class="lang-en intro-active">
+
+  <audio id="bg-music" loop preload="auto" playsinline>
+    <source src="muu.mp3" type="audio/mpeg">
+    <source src="muu.m4a" type="audio/mp4">
+    <source src="muu.wav" type="audio/wav">
+    <source src="muu.ogg" type="audio/ogg">
+  </audio>
+
+  <div id="intro-screen" onclick="playIntro()">
+    <video id="intro-video" src="emaa.mp4" muted playsinline preload="auto"></video>
+  </div>
+
+  <button class="music-toggle" id="music-toggle" onclick="toggleMusic(event)" aria-label="Music on/off" style="display:none">🔊</button>
+
+  <div class="lang-toggle">
+    <button class="lang-btn" data-lang="ar" onclick="setLang('ar')">عربي</button>
+    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <section class="main-image-section">
+    <img src="main.jpg" alt="أحمد وإيمان" class="ar">
+    <img src="main2.jpg" alt="Ahmed & Eman" class="en">
+  </section>
+
+  <section class="countdown-section">
+    <div class="countdown-title">
+      <span class="ar">العدّاد التنازلي</span><span class="en">COUNTDOWN</span>
+    </div>
+    <div class="countdown-sub">
+      <span class="ar"></span><span class="en">Until we say "I do"</span>
+    </div>
+    <div class="countdown-grid" id="countdown">
+      <div class="countdown-box"><div class="countdown-num" id="cd-days">--</div><div class="countdown-label"><span class="ar">أيام</span><span class="en">Days</span></div></div>
+      <div class="countdown-box"><div class="countdown-num" id="cd-hours">--</div><div class="countdown-label"><span class="ar">ساعات</span><span class="en">Hours</span></div></div>
+      <div class="countdown-box"><div class="countdown-num" id="cd-mins">--</div><div class="countdown-label"><span class="ar">دقايق</span><span class="en">Minutes</span></div></div>
+      <div class="countdown-box"><div class="countdown-num" id="cd-secs">--</div><div class="countdown-label"><span class="ar">ثواني</span><span class="en">Seconds</span></div></div>
+    </div>
+    <div class="countdown-dots"><span></span><i></i><span></span></div>
+  </section>
+
+  <section class="location-card">
+    <div class="heart-badge">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7.5-4.8-10-9.3C.5 8 2.3 4.5 6 4.2c2.2-.2 3.8 1 6 3 2.2-2 3.8-3.2 6-3 3.7.3 5.5 3.8 4 7.5-2.5 4.5-10 9.3-10 9.3z"/></svg>
+    </div>
+    <div class="location-title">
+      <span class="ar">حفل الزفاف</span><span class="en">Wedding Celebration</span>
+    </div>
+    <div class="location-times">
+      <div class="row">📅 <span class="ar">12-12-2026</span><span class="en">12-12-2026</span></div>
+      <div class="row">🕐 <span class="ar">الحفل: 8:00 م</span><span class="en">Wedding party : 8:00 PM</span></div>
+    
+    </div>
+    <div class="location-address">
+      <span class="ar">مسجد العزيز الحكيم<br>المقطم ، القاهرة ، مصر</span>
+      <span class="en">Al-Aziz Al-Hakim Mosque<br>Mokattam, Cairo, Egypt</span>
+      <span class="venue-note"><span class="ar">الحفل في ساحة المسجد (أوت دور)</span><span class="en">Outdoor celebration in the mosque courtyard</span></span>
+    </div>
+    <div class="map-embed">
+      <iframe src="https://www.google.com/maps?q=%D9%85%D8%B3%D8%AC%D8%AF+%D8%A7%D9%84%D8%B9%D8%B2%D9%8A%D8%B2+%D8%A7%D9%84%D8%AD%D9%83%D9%8A%D9%85+%D8%A7%D9%84%D9%85%D9%82%D8%B7%D9%85&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <a class="maps-btn" href="https://maps.app.goo.gl/QoA3jQFJvssihq238?g_st=ic" target="_blank" rel="noopener">
+      📍 <span class="ar">افتح في الخرائط</span><span class="en">Open in Maps</span>
+    </a>
+  </section>
+
+  <section class="rsvp-section" id="rsvp">
+    <div class="rsvp-inner">
+      <h2 class="rsvp-title">
+        <span class="ar">برجاء تأكيد حضورك</span><span class="en">Please confirm your attendance</span>
+      </h2>
+      <p class="rsvp-sub">
+        <span class="ar">ردّك يعني لنا الكثير.</span><span class="en">Your reply means so much to us.</span>
+      </p>
+
+      <form class="rsvp-card" id="rsvp-form" novalidate>
+        <div class="rsvp-field">
+          <label for="rsvp-name"><span class="ar">اسمك</span><span class="en">Your Name</span></label>
+          <input type="text" id="rsvp-name" autocomplete="name" maxlength="80">
+          <div class="rsvp-error" id="rsvp-name-error"><span class="ar">من فضلك اكتب اسمك</span><span class="en">Please enter your name</span></div>
+        </div>
+
+        <div class="rsvp-field">
+          <div class="rsvp-label"><span class="ar">هل ستشاركنا فرحتنا؟</span><span class="en">Will you join our celebration?</span></div>
+          <div class="rsvp-choices" role="group">
+            <button type="button" class="rsvp-choice" id="choice-no" data-value="no" aria-pressed="false">
+              <span class="ar">✕ مش هقدر أحضر</span><span class="en">✕ Can't attend</span>
+            </button>
+            <button type="button" class="rsvp-choice selected" id="choice-yes" data-value="yes" aria-pressed="true">
+              <span class="ar">✓ بكل سرور</span><span class="en">✓ Joyfully yes</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="rsvp-field">
+          <label for="rsvp-msg"><span class="ar">رسالة (اختياري)</span><span class="en">Message (optional)</span></label>
+          <textarea id="rsvp-msg" rows="4" maxlength="500"></textarea>
+        </div>
+
+        <button type="submit" class="rsvp-submit">
+          <span class="ar">أرسل الرسالة</span><span class="en">Send Message</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+ 
+  <section class="thankyou">
+    <div class="ty-divider"><span></span>✦<span></span></div>
+    <div class="ty-title">
+      <span class="ar">شكراً</span><span class="en">Thank you</span>
+    </div>
+    <div class="ty-sub">
+      <span class="ar">من قلبنا</span><span class="en">from our hearts</span>
+    </div>
+    <div class="ty-body">
+      <span class="ar">لمشاركتنا أجمل يوم في حياتنا</span><span class="en">For sharing our most precious day</span>
+    </div>
+    <div class="ty-sign">— <span class="ar">أ & إ</span><span class="en">A & E</span></div>
+  </section>
+
+
+  <div class="pick-overlay" id="pick-overlay" aria-hidden="true">
+    <div class="pick-box" role="dialog" aria-modal="true" aria-labelledby="pick-title">
+      <button type="button" class="pick-close" id="pick-close" aria-label="Close">&times;</button>
+      <div class="pick-heart">♡</div>
+      <div class="pick-title" id="pick-title">
+        <span class="ar">تحب تبعتها لمين؟</span><span class="en">Who is this for?</span>
+      </div>
+      <div class="pick-sub">
+        <span class="ar">اختار وهتفتح معاك واتساب</span><span class="en">Choose and WhatsApp will open</span>
+      </div>
+      <div class="pick-options">
+        <button type="button" class="pick-opt" data-to="bride">
+          <span class="pick-ico">👰</span>
+          <span class="pick-name"><span class="ar">للعروسة</span><span class="en">The Bride</span></span>
+        </button>
+        <button type="button" class="pick-opt" data-to="groom">
+          <span class="pick-ico">🤵</span>
+          <span class="pick-name"><span class="ar">للعريس</span><span class="en">The Groom</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ---------- Intro Video Logic ----------
+  const introScreen = document.getElementById('intro-screen');
+  const introVideo = document.getElementById('intro-video');
+
+  // ---------- Background Music (starts on the very first tap) ----------
+  const bgMusic = document.getElementById('bg-music');
+  const musicBtn = document.getElementById('music-toggle');
+  bgMusic.volume = 0.7;
+  let musicStarted = false;
+
+  function startMusic() {
+    if (musicStarted) return;
+    musicStarted = true;
+    const p = bgMusic.play();
+    if (p && p.then) {
+      p.then(function(){
+        musicBtn.style.display = 'block';
+        musicBtn.textContent = '🔊';
+      }).catch(function(){
+        musicStarted = false; // allow retry on the next tap
+      });
+    }
+  }
+  let userMuted = false;   // true only if the guest pressed the mute button themselves
+  function toggleMusic(e) {
+    e.stopPropagation();
+    if (bgMusic.paused) { userMuted = false; bgMusic.play(); musicBtn.textContent = '🔊'; }
+    else { userMuted = true; bgMusic.pause(); musicBtn.textContent = '🔇'; }
+  }
+
+  // ---------- Stop the music when the guest leaves the page ----------
+  function pauseMusicOnLeave() {
+    if (!bgMusic.paused) bgMusic.pause();
+  }
+  function resumeMusicOnReturn() {
+    if (musicStarted && !userMuted && bgMusic.paused) {
+      const p = bgMusic.play();
+      if (p && p.catch) p.catch(function(){ musicBtn.textContent = '🔇'; });
+    }
+  }
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) pauseMusicOnLeave(); else resumeMusicOnReturn();
+  });
+  window.addEventListener('pagehide', pauseMusicOnLeave);   // iPhone Safari / closing tab
+  window.addEventListener('pageshow', function(e){ if (e.persisted) resumeMusicOnReturn(); });
+  document.addEventListener('freeze', pauseMusicOnLeave);   // Android Chrome background freeze
+  // safety net: first touch / click / key anywhere
+  ['pointerdown','touchend','click','keydown'].forEach(function(ev){
+    document.addEventListener(ev, function(e){
+      if (e.target && e.target.id === 'music-toggle') return;
+      startMusic();
+    }, { passive: true });
+  });
+
+  // Show the video only once its first frame is really painted,
+  // so the photo stays on screen and no black flash appears.
+  function revealVideo() { introVideo.classList.add('ready'); }
+
+  function playIntro() {
+    startMusic();          // must run inside the tap handler (iPhone/Safari rule)
+    const p = introVideo.play();
+    if (p && p.catch) p.catch(function(){ introScreen.onclick = playIntro; });
+    if ('requestVideoFrameCallback' in introVideo) {
+      introVideo.requestVideoFrameCallback(revealVideo);
+    } else {
+      introVideo.addEventListener('timeupdate', function onT(){
+        if (introVideo.currentTime > 0) {
+          introVideo.removeEventListener('timeupdate', onT);
+          revealVideo();
+        }
+      });
+    }
+    introScreen.onclick = null; 
+  }
+
+  introVideo.addEventListener('ended', () => {
+    introScreen.style.opacity = '0';
+    setTimeout(() => {
+      introScreen.style.visibility = 'hidden';
+      document.body.classList.remove('intro-active'); 
+    }, 800);
+  });
+
+  // ---------- Language Switcher ----------
+  function setLang(lang){
+    document.body.classList.remove('lang-ar','lang-en');
+    document.body.classList.add('lang-' + lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.querySelectorAll('.lang-btn').forEach(b=>{
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+  }
+
+  // ---------- Countdown to 12 Dec 2026, 8:00 PM (Cairo) ----------
+  var weddingDate = new Date('2026-12-12T20:00:00+02:00').getTime();
+  function updateCountdown(){
+    var now = new Date().getTime();
+    var dist = weddingDate - now;
+    if(dist < 0){ dist = 0; }
+    var d = Math.floor(dist / (1000*60*60*24));
+    var h = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
+    var m = Math.floor((dist % (1000*60*60)) / (1000*60));
+    var s = Math.floor((dist % (1000*60)) / 1000);
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = h;
+    document.getElementById('cd-mins').textContent = m;
+    document.getElementById('cd-secs').textContent = s;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  // ---------- RSVP via WhatsApp ----------
+  var WHATSAPP_NUMBERS = {
+    bride: '201098858411',  // 01098858411
+    groom: '201099438366'   // +20 109 943 8366
+  };
+  var pendingText = '';
+  var rsvpChoice = 'yes';
+
+  document.querySelectorAll('.rsvp-choice').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      rsvpChoice = btn.dataset.value;
+      document.querySelectorAll('.rsvp-choice').forEach(function(b){
+        var on = b === btn;
+        b.classList.toggle('selected', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    });
+  });
+
+  document.getElementById('rsvp-name').addEventListener('input', function(){
+    this.closest('.rsvp-field').classList.remove('invalid');
+  });
+
+  document.getElementById('rsvp-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    var nameEl = document.getElementById('rsvp-name');
+    var name = nameEl.value.trim();
+    var note = document.getElementById('rsvp-msg').value.trim();
+    var isAr = document.body.classList.contains('lang-ar');
+
+    if(!name){
+      nameEl.closest('.rsvp-field').classList.add('invalid');
+      nameEl.focus();
+      return;
+    }
+
+    var line = '━━━━━━━━━━━━━━━';
+    var text;
+    if(isAr){
+      text = '💌 *تأكيد حضور*\n' +
+             '*زفاف أحمد & إيمان*\n' + line + '\n\n' +
+             '👤 *الاسم:* ' + name + '\n' +
+             (rsvpChoice === 'yes' ? '✅ *الحضور:* بكل سرور، هكون موجود' : '❌ *الحضور:* للأسف مش هقدر أحضر') + '\n' +
+             (note ? '💬 *الرسالة:* ' + note + '\n' : '') +
+             '\n' + line + '\n' +
+             '📅 12-12-2026  |  🕗 8:00 م\n' +
+             '📍 مسجد العزيز الحكيم، المقطم (ساحة المسجد - أوت دور)';
+    } else {
+      text = '💌 *RSVP*\n' +
+             '*Ahmed & Eman\'s Wedding*\n' + line + '\n\n' +
+             '👤 *Name:* ' + name + '\n' +
+             (rsvpChoice === 'yes' ? '✅ *Response:* Joyfully yes — I will be there' : '❌ *Response:* Sorry, I can\'t attend') + '\n' +
+             (note ? '💬 *Message:* ' + note + '\n' : '') +
+             '\n' + line + '\n' +
+             '📅 12-12-2026  |  🕗 8:00 PM\n' +
+             '📍 Al-Aziz Al-Hakim Mosque, Mokattam (outdoor courtyard)';
+    }
+
+    pendingText = text;
+    openPicker();
+  });
+
+  // ---------- Bride / Groom picker ----------
+  var pickOverlay = document.getElementById('pick-overlay');
+
+  function openPicker(){
+    pickOverlay.classList.add('show');
+    pickOverlay.setAttribute('aria-hidden', 'false');
+  }
+  function closePicker(){
+    pickOverlay.classList.remove('show');
+    pickOverlay.setAttribute('aria-hidden', 'true');
+  }
+
+  document.getElementById('pick-close').addEventListener('click', closePicker);
+  pickOverlay.addEventListener('click', function(e){
+    if(e.target === pickOverlay) closePicker();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closePicker();
+  });
+
+  document.querySelectorAll('.pick-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var number = WHATSAPP_NUMBERS[btn.dataset.to];
+      var url = 'https://wa.me/' + number + '?text=' + encodeURIComponent(pendingText);
+      closePicker();
+      var w = window.open(url, '_blank');
+      if(!w){ window.location.href = url; }
+    });
+  });
+
+</script>
+
+</body>
+</html>
